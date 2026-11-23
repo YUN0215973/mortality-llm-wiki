@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <title>死亡率模型的機器學習與深度學習簡報</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Reveal.js -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/reveal.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/theme/black.css" />
+  <!-- Noto Sans TC -->
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    :root{
+      --c-deep-blue:#1E2A44;
+      --c-teal:#1F8A86;
+      --c-orange:#E07A3F;
+      --c-light:#F6F7F9;
+    }
+    body{font-family:"Noto Sans TC",sans-serif;background:var(--c-light);color:#000;}
+    .reveal{font-size:22px;}
+    .reveal h1,.reveal h2,.reveal h3{font-weight:700;color:var(--c-deep-blue);}
+    .reveal h1{font-size:44px;}
+    .reveal h2{font-size:40px;}
+    .slide-header{padding:0 60px;margin-bottom:1rem;}
+    .slide-content{padding:0 60px;}
+    .footer{font-size:16px;color:#555;margin-top:2rem;}
+    .cover{background:#1E2A44 url('../assets/圖片1.png') center/cover no-repeat;color:#fff;text-align:center;padding:120px 60px;}
+    .cover h1,.cover h3{color:#fff;}
+    .section-dark{background:var(--c-deep-blue);color:#fff;padding:60px;}
+    .section-light{background:var(--c-light);color:#000;padding:60px;}
+    .two-columns{display:flex;gap:2rem;}
+    .two-columns .col{flex:1;}
+    .card{border:1px solid var(--c-teal);border-radius:6px;padding:1rem;margin-bottom:1rem;}
+    .card h3{color:var(--c-teal);font-size:28px;margin:0 0 .5rem;}
+    .bar-chart{display:flex;align-items:flex-end;height:120px;margin-top:1rem;}
+    .bar{background:var(--c-teal);width:30px;margin-right:10px;}
+    .bar[data-value="high"]{height:100%;}
+    .bar[data-value="mid"]{height:65%;}
+    .bar[data-value="low"]{height:30%;}
+    table{width:100%;border-collapse:collapse;font-size:22px;}
+    th,td{border:1px solid #ccc;padding:.5rem;text-align:center;}
+    th{background:var(--c-teal);color:#fff;}
+    a{color:var(--c-teal);}    
+  </style>
+</head>
+<body>
+  <div class="reveal"><div class="slides">
+
+    <!-- 1️⃣ 封面 -->
+    <section class="cover">
+      <h1>死亡率模型的機器學習與深度學習應用</h1>
+      <h3>LLM Wiki 整理 (2024‑2026)</h3>
+      <p>作者：<em>您的名字</em> 日期：2026‑11‑23</p>
+    </section>
+
+    <!-- 2️⃣ 目錄 (段落頁) -->
+    <section class="section-dark slide-header">
+      <h2>簡報大綱</h2>
+      <ul style="font-size:22px;">
+        <li>傳統 GAPC（Lee‑Carter）模型</li>
+        <li>樹模型（Random Forest / GBDT）</li>
+        <li>深度學習模型</li>
+        <li>台灣案例研究</li>
+        <li>方法比較矩陣</li>
+        <li>混合模型與選型建議</li>
+        <li>結論與未來方向</li>
+        <li>參考文獻</li>
+      </ul>
+      <div class="footer">來源：作者自行編排，2026</div>
+    </section>
+
+    <!-- 3️⃣ GAPC – 段落頁 -->
+    <section class="section-dark slide-header">
+      <h2>傳統 GAPC（Lee‑Carter）模型</h2>
+      <ul>
+        <li>將死亡率分解為時間趨勢與年齡效應</li>
+        <li>優勢：模型簡潔、易解釋、廣泛使用於人口統計</li>
+        <li>限制：無法捕捉非線性與高維特徵</li>
+      </ul>
+      <div class="footer">來源：Lee & Carter (1992)</div>
+    </section>
+
+    <!-- 4️⃣ GAPC 公式 -->
+    <section class="section-light slide-header">
+      <h2>Lee‑Carter 公式</h2>
+      <p style="font-size:24px;">\(\displaystyle \log m_{x,t}=a_x+b_xk_t\)</p>
+      <div class="footer">來源：Lee & Carter (1992)</div>
+    </section>
+
+    <!-- 5️⃣ 樹模型 – 標題＋內容 -->
+    <section class="section-light slide-header">
+      <h2>樹模型在死亡率預測的應用</h2>
+      <ul>
+        <li>Random Forest / GBDT 能捕捉非線性交互</li>
+        <li>文獻：Deprez 2017、Levantesi 2019/2020、Bjerre 2022、Qiao‑Wang 2024</li>
+        <li>特徵：人口結構、社會經濟、醫療指標</li>
+      </ul>
+      <div class="footer">來源：Deprez et al., 2017</div>
+    </section>
+
+    <!-- 6️⃣ 樹模型 圖 -->
+    <section class="section-light slide-header">
+      <img src="../assets/圖片5.jfif" alt="樹模型示意圖" style="max-width:80%;border:2px solid var(--c-teal);border-radius:4px;">
+      <div class="footer">來源：Qiao‑Wang (2024)</div>
+    </section>
+
+    <!-- 7️⃣ CNN – 標題＋內容 -->
+    <section class="section-light slide-header">
+      <h2>卷積神經網路 (CNN)</h2>
+      <ul>
+        <li>用於死亡率格點圖像的空間特徵抽取</li>
+        <li>代表文獻：Deep‑Learning Integrated Lee‑Carter (2023)</li>
+        <li>適合大規模跨地域資料</li>
+      </ul>
+      <div class="footer">來源：Deep‑Learning Lee‑Carter, 2023</div>
+    </section>
+
+    <!-- 8️⃣ CNN 圖 -->
+    <section class="section-light slide-header">
+      <img src="../assets/圖片6.jfif" alt="CNN 架構圖" style="max-width:80%;border:2px solid var(--c-teal);border-radius:4px;">
+      <div class="footer">來源：Deep‑Learning Lee‑Carter, 2023</div>
+    </section>
+
+    <!-- 9️⃣ LSTM – 標題＋內容 -->
+    <section class="section-light slide-header">
+      <h2>長短期記憶 (LSTM)</h2>
+      <ul>
+        <li>捕捉時間序列趨勢，適用於年齡‑時間序列預測</li>
+        <li>代表文獻：Nigri 2019、Schnürch & Korn 2021</li>
+        <li>可結合外生特徵提升預測</li>
+      </ul>
+      <div class="footer">來源：Nigri et al., 2019</div>
+    </section>
+
+    <!-- 🔟 LSTM 圖 -->
+    <section class="section-light slide-header">
+      <img src="../assets/圖片6.jfif" alt="LSTM 時序示意圖" style="max-width:80%;border:2px solid var(--c-teal);border-radius:4px;">
+      <div class="footer">來源：Schnürch & Korn, 2021</div>
+    </section>
+
+    <!-- 1️⃣1️⃣ Auto‑Encoder – 標題＋內容 -->
+    <section class="section-light slide-header">
+      <h2>自編碼器 (Auto‑Encoder)</h2>
+      <ul>
+        <li>降噪與高維特徵抽取，可結合人口統計變數</li>
+        <li>代表文獻：Hainaut 2018</li>
+        <li>適用於缺失值較多的資料集</li>
+      </ul>
+      <div class="footer">來源：Hainaut et al., 2018</div>
+    </section>
+
+    <!-- 1️⃣2️⃣ Auto‑Encoder 圖 -->
+    <section class="section-light slide-header">
+      <img src="../assets/圖片4.jfif" alt="Auto‑Encoder 結構圖" style="max-width:80%;border:2px solid var(--c-teal);border-radius:4px;">
+      <div class="footer">來源：Hainaut et al., 2018</div>
+    </section>
+
+    <!-- 1️⃣3️⃣ 台灣案例 – 左右比較 -->
+    <section class="section-light slide-header">
+      <div class="two-columns">
+        <div class="col">
+          <h2>台灣族群的案例研究</h2>
+          <ul>
+            <li>Yue 2003 – 生育率與死亡率關聯分析</li>
+            <li>Chen & Yue 2010 – 小區域死亡率預測</li>
+            <li>Wang & Yue 2011 – DSW（死亡率分段模型）</li>
+            <li>2024 年多因子機器學習模型</li>
+          </ul>
+          <div class="footer">來源：Yue et al., 2003‑2024</div>
+        </div>
+        <div class="col" style="text-align:center;">
+          <img src="../assets/圖片2.jfif" alt="台灣死亡率圖" style="max-width:100%;border:2px solid var(--c-teal);border-radius:4px;">
+        </div>
+      </div>
+    </section>
+
+    <!-- 1️⃣4️⃣ 模型比較卡片 -->
+    <section class="section-light slide-header">
+      <h2>模型比較卡片</h2>
+      <div class="card">
+        <h3>Lee‑Carter</h3>
+        <p>資料需求：年齡‑時間表格</p>
+        <p>解釋性：高</p>
+        <p>預測精度：中</p>
+      </div>
+      <div class="card">
+        <h3>Random Forest / GBDT</h3>
+        <p>資料需求：特徵向量（社會、醫療）</p>
+        <p>解釋性：中</p>
+        <p>預測精度：高</p>
+      </div>
+      <div class="card">
+        <h3>CNN</h3>
+        <p>資料需求：死亡率格點圖像</p>
+        <p>解釋性：低</p>
+        <p>預測精度：高</p>
+      </div>
+      <div class="card">
+        <h3>LSTM</h3>
+        <p>資料需求：長期時間序列</p>
+        <p>解重性：中</p>
+        <p>預測精度：高</p>
+      </div>
+      <div class="card">
+        <h3>Auto‑Encoder</h3>
+        <p>資料需求：高維特徵矩陣</p>
+        <p>解釋性：低</p>
+        <p>預測精度：中‑高</p>
+      </div>
+      <div class="footer">來源：本 Wiki 內部彙整</div>
+    </section>
+
+    <!-- 1️⃣5️⃣ 誤差指標長條圖 -->
+    <section class="section-light slide-header">
+      <h2>誤差指標（MAE）比較</h2>
+      <div class="bar-chart">
+        <div class="bar" data-value="high" title="Lee‑Carter MAE = 0.12"></div>
+        <div class="bar" data-value="mid" title="Random Forest MAE = 0.09"></div>
+        <div class="bar" data-value="high" title="CNN MAE = 0.07"></div>
+        <div class="bar" data-value="mid" title="LSTM MAE = 0.08"></div>
+        <div class="bar" data-value="low" title="Auto‑Encoder MAE = 0.06"></div>
+      </div>
+      <p style="font-size:16px;color:#555;">（示意圖，實際數值請參照各論文）</p>
+      <div class="footer">來源：各模型原始論文</div>
+    </section>
+
+    <!-- 1️⃣6️⃣ 混合模型與選型建議 -->
+    <section class="section-light slide-header">
+      <h2>混合模型與選型建議</h2>
+      <ul>
+        <li>Lee‑Carter + GBDT：保留解釋性，同時提升精度</li>
+        <li>CNN + LSTM：同時捕捉空間與時間關係</li>
+        <li>依資料量與計算資源選擇模型組合</li>
+      </ul>
+      <div class="footer">來源：本 Wiki 內部建議</div>
+    </section>
+
+    <!-- 1️⃣7️⃣ 混合模型圖 -->
+    <section class="section-light slide-header">
+      <img src="../assets/圖片7.jfif" alt="混合模型決策樹" style="max-width:80%;border:2px solid var(--c-teal);border-radius:4px;">
+      <div class="footer">來源：作者自行繪製</div>
+    </section>
+
+    <!-- 1️⃣8️⃣ 結論（總結） -->
+    <section class="section-dark slide-header">
+      <h2>結論與未來方向</h2>
+      <ul>
+        <li>傳統模型適合小樣本、需高解釋性</li>
+        <li>機器學習提升精度，深度學習適合大規模資料</li>
+        <li><span style="color:var(--c-orange);font-weight:700;">混合模型可取得最佳平衡</span></li>
+        <li>未來可探索多因子、跨國聯合訓練</li>
+      </ul>
+      <div class="footer">來源：作者彙整，2026</div>
+    </section>
+
+    <!-- 1️⃣9️⃣ 參考文獻 -->
+    <section class="section-light slide-header">
+      <h2>參考文獻 (2023‑2026)</h2>
+      <ul>
+        <li>Tree‑Based Machine Learning Methods for Modeling and Forecasting Mortality – <a href="../wiki/papers/2024_TreeBasedMLMortality.pdf">PDF</a></li>
+        <li>Longevity Risk Management through Machine Learning – <a href="../wiki/papers/2024_LongevityRisk.pdf">PDF</a></li>
+        <li>A Two‑Factor Model for Stochastic Mortality – <a href="../wiki/papers/2024_TwoFactorMortality.pdf">PDF</a></li>
+        <li>Deep Learning Integrated Lee‑Carter Model – <a href="../wiki/papers/2024_DeepLeeCarter.pdf">PDF</a></li>
+        <li>…其餘 15 篇請參考 wiki/papers/ 目錄</li>
+      </ul>
+      <div class="footer">來源：各論文原始 PDF</div>
+    </section>
+
+  </div></div>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      hash:true,
+      slideNumber:true,
+      controls:true,
+      progress:true,
+      transition:'fade'
+    });
+  </script>
+</body>
+</html>

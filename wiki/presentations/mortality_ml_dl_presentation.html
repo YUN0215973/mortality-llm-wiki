@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <title>死亡率機器學習與深度學習簡報</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Reveal.js CDN -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/reveal.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/theme/white.css" />
+  <style>
+    .reveal section { font-size: 1.2em; }
+    h1, h2, h3 { margin: 0.5em 0; }
+    ul { margin-left: 1.5em; }
+    img { max-width: 80%; height: auto; }
+  </style>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <!-- Slide 1: Title -->
+      <section>
+        <h1>死亡率模型的機器學習與深度學習應用</h1>
+        <h3>LLM Wiki 整理</h3>
+        <p>2024‑2026 年相關文獻概覽</p>
+      </section>
+
+      <!-- Slide 2: Classical GAPC Models -->
+      <section>
+        <h2>傳統 GAPC（Lee‑Carter）模型</h2>
+        <ul>
+          <li>基本假設：死亡率以時間趨勢與年齡特徵分解</li>
+          <li>優勢：簡潔、易解釋、廣泛用於人口統計</li>
+          <li>限制：無法捕捉非線性與高維特徵</li>
+        </ul>
+        <p>詳見 <a href="../wiki/concepts/Lee‑Carter Model.md">[[Lee‑Carter Model (LC)]]</a></p>
+      </section>
+
+      <!-- Slide 3: Tree‑Based Machine‑Learning Models -->
+      <section>
+        <h2>樹模型在死亡率預測的應用</h2>
+        <ul>
+          <li>隨機森林、梯度提升樹 (GBDT) 可捕捉非線性交互</li>
+          <li>常見文獻：Deprez 2017、Levantesi 2019/2020、Bjerre 2022、Qiao‑Wang 2024</li>
+          <li>主要改進：特徵工程（人口結構、社會經濟指標）</li>
+        </ul>
+        <img src="../assets/圖片5.jfif" alt="樹模型示意圖" />
+      </section>
+
+      <!-- Slide 4: Deep‑Learning Approaches -->
+      <section>
+        <h2>深度學習方法</h2>
+        <ul>
+          <li>卷積神經網路 (CNN) 用於死亡率曲面映射</li>
+          <li>長短期記憶 (LSTM) 捕捉時間序列趨勢</li>
+          <li>自編碼器 (Auto‑Encoder) 用於降噪與特徵抽取</li>
+          <li>代表文獻：Hainaut 2018、Nigri 2019、Schnürch & Korn 2021、Deep‑Learning Integrated Lee‑Carter (2023)</li>
+        </ul>
+        <img src="../assets/圖片6.jfif" alt="深度學習架構示意" />
+      </section>
+
+      <!-- Slide 5: 台灣特定研究 -->
+      <section>
+        <h2>台灣族群的案例研究</h2>
+        <ul>
+          <li>Yue 2003：生育率與死亡率的關聯分析</li>
+          <li>Chen & Yue 2010：小區域死亡率預測</li>
+          <li>Wang & Yue 2011：DSW (死亡率分段模型)</li>
+          <li>近年結合機器學習的研究：2024 年多因子模型</li>
+        </ul>
+        <img src="../assets/圖片2.jfif" alt="台灣死亡率圖" />
+      </section>
+
+      <!-- Slide 6: Comparative Matrix -->
+      <section>
+        <h2>方法比較矩陣</h2>
+        <table border="1" cellpadding="4" cellspacing="0" style="font-size:0.9em; width:100%;">
+          <thead>
+            <tr>
+              <th>方法</th><th>資料需求</th><th>解釋性</th><th>預測準確度</th><th>計算成本</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Lee‑Carter</td><td>年齡‑時間表格</td><td>高</td><td>中</td><td>低</td></tr>
+            <tr><td>隨機森林 / GBDT</td><td>特徵向量 (社會、醫療等)</td><td>中</td><td>高</td><td>中</td></tr>
+            <tr><td>CNN</td><td>死亡率格點圖像</td><td>低</td><td>高</td><td>高</td></tr>
+            <tr><td>LSTM</td><td>長期時間序列</td><td>中</td><td>高</td><td>中</td></tr>
+            <tr><td>Auto‑Encoder</td><td>高維特徵矩陣</td><td>低</td><td>中‑高</td><td>高</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- Slide 7: Key Takeaways -->
+      <section>
+        <h2>主要結論與實務建議</h2>
+        <ul>
+          <li>若資料量有限且需解釋性，保留傳統 GAPC 或加入少量隨機森林特徵。</li>
+          <li>大規模、跨地域資料適合深度學習模型，尤其 CNN 在空間‑時間映射上表現佳。</li>
+          <li>混合模型（例如 Lee‑Carter + GBDT）在多因子情境下取得最佳平衡。</li>
+          <li>模型選擇應考慮計算資源、更新頻率與應用場景（政策制定 vs. 個人化預測）。</li>
+        </ul>
+      </section>
+
+      <!-- Slide 8: References -->
+      <section>
+        <h2>參考文獻 (2023‑2026)</h2>
+        <ul>
+          <li>Tree‑Based Machine Learning Methods for Modeling and Forecasting Mortality – <a href="../wiki/papers/2024_TreeBasedMLMortality.pdf">PDF</a></li>
+          <li>Longevity Risk Management through Machine Learning – <a href="../wiki/papers/2024_LongevityRisk.pdf">PDF</a></li>
+          <li>A Two‑Factor Model for Stochastic Mortality – <a href="../wiki/papers/2024_TwoFactorMortality.pdf">PDF</a></li>
+          <li>Deep Learning Integrated Lee‑Carter Model – <a href="../wiki/papers/2024_DeepLeeCarter.pdf">PDF</a></li>
+          <li>... （其餘 15 篇請參考 wiki/papers/）</li>
+        </ul>
+      </section>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      hash: true,
+      slideNumber: true,
+      controls: true,
+      progress: true,
+    });
+  </script>
+</body>
+</html>
