@@ -33,13 +33,13 @@ LLM Wiki Notes/
 
 每篇論文頁固定五段：研究背景與問題 → 核心方法 → 實驗成果 → 限制與反思 → 文獻脈絡（用 `[[連結]]` 串起前後論文）。
 
-**Wiki 連結：** ＿＿＿（GitHub 連結）
+**Wiki 連結：**https://github.com/yun0215973/mortality-llm-wiki)（GitHub 連結）
 
 ---
 
 ## 二、教學 HTML 簡報
 
-**簡報連結：** ＿＿＿
+**簡報連結：** https://yun0215973.github.io/mortality-llm-wiki/wiki/presentations/mortality_ml_dl_presentation_v9.html
 
 **受眾：** 沒學過死亡率模型的大學生
 **頁數：** 38 頁，鍵盤 ← → 或空白鍵換頁
