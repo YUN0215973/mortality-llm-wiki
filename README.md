@@ -33,7 +33,7 @@ LLM Wiki Notes/
 
 每篇論文頁固定五段：研究背景與問題 → 核心方法 → 實驗成果 → 限制與反思 → 文獻脈絡（用 `[[連結]]` 串起前後論文）。
 
-**Wiki 連結：**https://github.com/yun0215973/mortality-llm-wiki)（GitHub 連結）
+**Wiki 連結：**https://github.com/yun0215973/mortality-llm-wiki
 
 ---
 
